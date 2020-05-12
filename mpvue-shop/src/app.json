@@ -28,8 +28,7 @@
     "backgroundColor": "#fafafa",
     "selectedColor": "#b4282d",
     "borderStyle": "white",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/index/main",
         "iconPath": "static/images/ic_menu_choice_nor.png",
         "selectedIconPath": "static/images/ic_menu_choice_pressed.png",
@@ -61,5 +60,15 @@
       }
     ],
     "position": "bottom"
+  },
+  "permission": {
+
+    "scope.userLocation": {
+
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+
+    }
+
   }
+
 }

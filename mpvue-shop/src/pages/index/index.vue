@@ -5,6 +5,7 @@
       <div @click="toMappage">{{cityName}}</div>
       <div @click="toSearch">
         <input type="text" placeholder="搜索商品" />
+        <!-- 放大镜图标 -->
         <span class="icon"></span>
       </div>
     </div>
@@ -125,6 +126,7 @@
 </template>
 
 <script>
+// 引入高德的微信sdk
 import amapFile from '../../utils/amap-wx.js'
 import { mapState, mapMutations } from 'vuex'
 import { get } from '../../utils'
@@ -149,13 +151,15 @@ export default {
   },
   methods: {
     ...mapMutations(['update']),
+    // 地图定位
     toMappage () {
       // 通过 wx.getSetting 先查询一下用户是否授权 “scoped.record”
+     
       let _this = this
       wx.getSetting({
         success: (res) => {
           // 如果没有同意授权，打开设置
-          // console.log(res)
+          console.log('wx.getSetting,',res)
           if (!res.authSetting['scope.userLocation']) {
             wx.openSetting({
               success: res => {
@@ -165,6 +169,7 @@ export default {
             })
           } else {
             wx.navigateTo({
+              // 跳转地图页面
               url: '/pages/mappage/main',
             });
             // _this.getCityName()
@@ -177,18 +182,20 @@ export default {
       });
         
     },
+    // 获取授权位置信息
     getCityName () {
       let _this = this
-      var myAmapFun = new amapFile.AMapWX({key:'256d94ac927c73a25e9177d789a1d060'});
+      var myAmapFun = new amapFile.AMapWX({key:'33c20afb72594bbe7c04c613e1055085'});
+      // 获取
       myAmapFun.getRegeo({
         success: function (data) {
           // 成功回调
-          console.log(data)
+          console.log('amapFile.AmapWx.getRegeo(),',data)
           // ........
         },
         fail: function (info) {
           // 失败回调
-          console.log(info)
+          console.log('amapFile.AmapWx.getRegeo(),',info)
           // _this.cityName = '北京'
           _this.update({ cityName: '北京' })
         }

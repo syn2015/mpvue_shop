@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
-
+// Store仓库
 const store = new Vuex.Store({
   state: {
     cityName: '定位中..'

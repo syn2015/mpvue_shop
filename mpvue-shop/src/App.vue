@@ -46,6 +46,7 @@ export default {
 
 <style>
 @import url('./iconfont/iconfont.css');
+/* 公共样式 */
 .container {
   height: 100%;
   display: flex;
@@ -73,6 +74,7 @@ view,text{
   font-size: 28rpx;
   color: #333333;
 }
+/*  */
 .wxParse .p{
   margin: 0 !important;
 }
