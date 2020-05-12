@@ -87,6 +87,7 @@
         </ul>
       </div>
     </div>
+    <!-- 专题精选 -->
     <div class="topicList">
       <div class="topicList-top">
         专题精选
@@ -109,6 +110,7 @@
         </ul>
       </div>
     </div>
+    <!-- 居家好物等 -->
     <div class="newcategory">
       <div class="list" v-for="(item ,index) in newCategoryList" :key="index">
         <div class="head">{{item.name}}好物</div>
@@ -118,6 +120,7 @@
             <p>{{subitem.name}}</p>
             <p>{{subitem.retail_price}}</p>
           </div>
+          <!-- 箭头 -->
           <div>
             <div class="last">
               <p>{{item.name}}好物</p>
@@ -260,7 +263,7 @@ export default {
         })
       }
     },
-    // 
+    // 专题精选
     topicdetail (id) {
       wx.navigateTo({
         url: '/pages/topicdetail/main?id=' + id

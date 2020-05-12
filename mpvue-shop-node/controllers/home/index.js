@@ -26,6 +26,7 @@ module.exports = async (ctx) => {
   const topicList = await mysql('nideshop_topic').limit(3).select()
 
   // 类别列表 **好物
+  // parent_id为0的代表是顶级，用作标题
   const categoryList = await mysql('nideshop_category').where({
     parent_id: 0
   }).select()
@@ -36,12 +37,15 @@ module.exports = async (ctx) => {
     let childCategoryIds = await mysql('nideshop_category').where({
       parent_id: item.id
     }).column('id').select()
+    console.log('childCategoryIds前,',childCategoryIds)
     // 变成数组的形式 [1020000, 1036002]
     childCategoryIds = childCategoryIds.map((item) => {
       return item.id
     })
+    console.log('childCategoryIds后,',childCategoryIds)
     // 在商品中找到在childCategoryIds里的7条数据
     const categoryGoods = await mysql('nideshop_goods').column('id', 'name', 'list_pic_url', 'retail_price').whereIn('category_id', childCategoryIds).limit(7).select()
+    console.log('categoryGoods构造数据,',categoryGoods)
     newCategoryList.push({
       'id': item.id,
       'name': item.name,
