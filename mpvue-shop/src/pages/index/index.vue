@@ -9,6 +9,7 @@
         <span class="icon"></span>
       </div>
     </div>
+    <!-- 主页轮播 -->
     <div class="swiper">
       <swiper class="swiper-container" indicator-dots="true" autoplay="true" interval="3000" circular="true" duration="500">
         <block v-for="(item, index) in banner" :key="index">
@@ -201,8 +202,9 @@ export default {
         }
       })
     },
-
+    // 获取数据使用封装的wx.request
     async getData() {
+      // 后端定义的地址url:http://localhost:5757/lm/index/index
       const data = await get('/index/index') // http://localhost:5757/lm/index/index
       console.log(data)
       this.banner = data.banner

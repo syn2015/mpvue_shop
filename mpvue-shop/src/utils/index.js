@@ -1,3 +1,4 @@
+// 时间格式封装formatNumber
 function formatNumber (n) {
   const str = n.toString()
   return str[1] ? str : `0${str}`
@@ -29,6 +30,7 @@ function request (url, method, data, header = {}) {
   wx.showLoading({
     title: "加载中"
   });
+  // 使用promise封装
   return new Promise((resolve, reject) => {
     wx.request({
       url: host + url,

@@ -1,6 +1,7 @@
 // 获取基础配置
 const configs = require('./config')
 
+// 使用knex ，一款sql查询构建器，创建mysql连接池
 var knex = require('knex') ({
   client: 'mysql',
   connection: {

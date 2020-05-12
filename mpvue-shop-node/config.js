@@ -1,3 +1,4 @@
+// 数据库配置
 const CONF = {
   port: '5757',
   mysql: {
@@ -5,7 +6,7 @@ const CONF = {
     port: 3306,
     user: 'root',
     db: 'nodemysql',
-    pass: 'xfwnxn1023',
+    pass: 'mysql',
     char: 'utf8mb4'
   }
 }

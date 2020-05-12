@@ -1,6 +1,8 @@
+// 引入koa-router并实例化router
 const router = require('koa-router')({
   prefix: '/lm'
 })
+// 引入控制层controllers
 const controllers = require('../controllers/index')
 
 // 首页相关的接口
