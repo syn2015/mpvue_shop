@@ -9,15 +9,15 @@ module.exports = async (ctx) => {
   // tab类型
   const channel = await mysql('nideshop_channel').select()
 
-  // 品牌列表
+  // 品牌列表，最新产品的前四数据
   const brandList = await mysql('nideshop_brand').where({
     is_new: 1
   }).orderBy('new_sort_order', 'asc').limit(4).select()
 
-  // 新品首发
+  // 新品首发，包含在列举值中的数据，且是新品
   const newGoods = await mysql('nideshop_goods').whereIn('id', [1181000, 1135002, 1134030, 1134032]).andWhere('is_new', 1).select()
 
-  // 人气推荐
+  // 人气推荐，列出指定字段的最新的前五条数据
   const hotGoods = await mysql('nideshop_goods').column('id', 'name', 'list_pic_url', 'retail_price', 'goods_brief').where({
     is_hot: 1
   }).limit(5).select()
@@ -48,7 +48,7 @@ module.exports = async (ctx) => {
       'goodsList': categoryGoods
     })
   }
-
+  // 输出格式
   ctx.body = {
     'banner': banner,
     'channel': channel,

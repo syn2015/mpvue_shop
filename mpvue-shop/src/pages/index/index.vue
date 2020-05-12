@@ -19,12 +19,14 @@
         </block>
       </swiper>
     </div>
+    <!-- 频道 -->
     <div class="channel">
       <div v-for="(item, index) in channel" :key="index" @click="categroyList(item.id)">
         <img :src="item.icon_url" alt="">
         <p>{{item.name}}</p>
       </div>
     </div>
+    <!-- 品牌区域 -->
     <div class="brand">
       <div class="head" @click="tobrandList">
         品牌制造商直供
@@ -39,6 +41,7 @@
         </div>
       </div>
     </div>
+    <!-- 新品首发 -->
     <div class="newgoods">
       <div class="newgoods-top" @click="goodsList('new')">
         <div class="top">
@@ -59,6 +62,7 @@
         </ul>
       </div>
     </div>
+    <!-- 人气推荐 -->
     <div class="newgoods hotgoods">
       <div class="newgoods-top" @click="goodsList('hot')">
         <div class="top">
@@ -146,6 +150,9 @@ export default {
   computed: {
     ...mapState(['cityName'])
   },
+  // 获取数据并定位
+  // mounted，
+  // mpvue中，初始化请求尽量不放到create，created中。小程序中，所有页面的creat，created都会执行，造成卡顿
   mounted () {
     this.getData()
     this.getCityName()
@@ -206,7 +213,7 @@ export default {
     async getData() {
       // 后端定义的地址url:http://localhost:5757/lm/index/index
       const data = await get('/index/index') // http://localhost:5757/lm/index/index
-      console.log(data)
+      console.log('getData,',data)
       this.banner = data.banner
       this.channel = data.channel
       this.brandList = data.brandList
@@ -220,23 +227,29 @@ export default {
         url: '/pages/search/main'
       })
     },
+    // 频道跳转
     categroyList (id) {
-      console.log(123)
+      console.log('categroyList,跳转id:',id)
       wx.navigateTo({
         url: '/pages/categroylist/main?id=' + id
       })
     },
+    // 品牌跳转
     branddetail (id) {
+      console.log('brandetail品牌,id:',id)
       wx.navigateTo({
         url: '/pages/branddetail/main?id=' + id
       })
     },
+    // 品牌制造商跳转
     tobrandList () {
       wx.navigateTo({
         url: '/pages/brandlist/main'
       })
     },
+    // 人气推荐还是新品首发
     goodsList (info) {
+      console.log('goodsList,新品首府阿还是人气推荐，',info)
       if (info == 'hot') {
         wx.navigateTo({
           url: '/pages/newgoods/main?isHot=' + 1
@@ -247,6 +260,7 @@ export default {
         })
       }
     },
+    // 
     topicdetail (id) {
       wx.navigateTo({
         url: '/pages/topicdetail/main?id=' + id

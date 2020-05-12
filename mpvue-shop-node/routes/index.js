@@ -1,10 +1,12 @@
-// 引入koa-router并实例化router
+// 引入koa-router并实例化router,配置prefix前缀
 const router = require('koa-router')({
   prefix: '/lm'
 })
 // 引入控制层controllers
 const controllers = require('../controllers/index')
 
+//路由分发 start
+ 
 // 首页相关的接口
 router.get('/index/index', controllers.home.index)
 
@@ -47,5 +49,7 @@ router.post('/address/saveAction', controllers.address.index.saveAction)
 // 专题接口
 router.get('/topic/listaction', controllers.topic.index.listAction)
 router.get('/topic/detailaction', controllers.topic.index.detailAction)
+
+//路由分发 end
 
 module.exports = router
