@@ -1,12 +1,13 @@
 const { mysql } = require('../../mysql')
 
+// get方式传递
 async function indexAction(ctx) {
   const openId = ctx.query.openId
-  // 默认关键字
+  // 默认关键字，is_default为1是属于热门搜索中标红的关键字
   const defaultKeyword = await mysql('nideshop_keywords').where({
     is_default: 1
   }).limit(1).select()
-  // 取出热门关键字
+  // 取出热门关键字，distinct，去重。
   const hotKeywordList = await mysql('nideshop_keywords').distinct('keyword').column('keyword', 'is_hot').limit(10).select()
 
   const historyData = await mysql('nideshop_search_history').where({
@@ -59,6 +60,7 @@ async function addHistoryAction(ctx) {
       'keyword': keyword,
       'add_time': parseInt(new Date().getTime() / 1000)
     })
+    // 插入新词成功
     if (data) {
       ctx.body = {
         data: 'success'

@@ -4,6 +4,7 @@
     <div class="head">
       <div>
         <img src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/search2-2fb94833aa.png" alt="">
+        <!-- confirm-type="search",键盘按钮为搜索；focus="true" ,光标聚焦；@confirm="",点击键盘按钮触发 -->
         <input type="text" confirm-type="search" focus="true" v-model="words" @focus="inputFocus" @input="tipsearch" @confirm="searchWords" placeholder="商品搜索">
         <img @click="clearInput" class="del" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/clearIpt-f71b83e3c2.png" alt="">
       </div>
@@ -63,6 +64,7 @@
 </template>
 
 <script>
+// 引入封装的get,post
 import { get, post } from '../../utils'
 export default {
   data () {
@@ -77,6 +79,7 @@ export default {
       nowIndex: 0
     }
   },
+  // mounted(),获取openid
   mounted () {
     this.openid = wx.getStorageSync('openId') || '';
     this.getHotData()
@@ -108,30 +111,37 @@ export default {
       // 展示搜索提示信息
       this.tipsearch()
     },
+    //@input
     async tipsearch() {
       const data = await get('/search/helperaction', {
         keyword: this.words
       })
       this.tipsData = data.keywords
     },
+    // @confirm
     async searchWords(e) {
+      // 
+      console.log('input小程序的值，',e.currentTarget.dataset.value);
       let value = e.currentTarget.dataset.value
+      // vue双向绑定或者小程序的取值
       this.words = value || this.words
       const data = await post('/search/addhistoryaction', {
         openId: this.openid,
         keyword: value || this.words
       })
-      // console.log(data)
+      console.log('data获取历史记录，',data)
       // 获取历史数据
       this.getHotData()
       this.getlistData()
     },
+    // 
     async getHotData (first) {
       const data = await get('/search/indexaction?openId=' + this.openid)
       this.historyData = data.historyData
       this.hotData = data.hotKeywordList
-      // console.log(data)
+      console.log("getHotData,",data)
     },
+    // 
     async getlistData () {
       // 获取商品列表
       const data  = await get('/search/helperaction', {
@@ -142,6 +152,7 @@ export default {
       this.tipsData = []
       console.log(data)
     },
+    // 
     changeTab(index) {
       this.nowIndex = index
       if (index === 1) {
@@ -151,6 +162,7 @@ export default {
       }
       this.getlistData()
     },
+    // 
     goodsDetail (id) {
       wx.navigateTo({
         url: '/pages/goods/main?id=' + id
