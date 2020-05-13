@@ -1,6 +1,7 @@
 .search{
   height: 100%;
   position: relative;
+  // 搜索框
   .head{
     height: 91rpx;
     display: flex;
@@ -26,17 +27,20 @@
         height: 59rpx;
         margin-left: 10rpx;
       }
+      // 删除图标
       .del{
         width: 53rpx;
         height: 53rpx;
         padding: 0;
       }
     }
+    // 取消按钮
     div:nth-child(2) {
       flex: 1;
       text-align: center;
     }
   }
+  // 搜索词提示
   .searchtips{
     position: absolute;
     width: 100%;
@@ -63,6 +67,7 @@
   .history{
     background: #fff;
     padding: 32rpx;
+    // 删除功能
     .t{
       display: flex;
       justify-content: space-between;
@@ -75,23 +80,28 @@
         background-size: 100% 100%;
       }
     }
+    // 搜索词
     .cont{
       display: flex;
       flex-wrap: wrap;
+      // 每个搜索词
       div{
         padding: 10rpx;
         border: 1rpx solid #999;
         margin: 0 30rpx 20rpx 0;
       }
+      // 热门搜索第一个词标红
       .active{
         border: 1rpx solid #b4282d;
         color: #b4282d;
       }
     }
   }
+  // 热门搜索
   .hotsearch{
     margin-top: 20rpx;
   }
+  // 商品列表
   .goodsList{
     position: absolute;
     width: 100%;

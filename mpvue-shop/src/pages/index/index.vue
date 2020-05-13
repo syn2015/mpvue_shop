@@ -225,6 +225,7 @@ export default {
       this.topicList = data.topicList
       this.newCategoryList = data.newCategoryList
     },
+    // 搜索商品，跳转页面
     toSearch () {
       wx.navigateTo({
         url: '/pages/search/main'

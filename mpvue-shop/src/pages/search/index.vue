@@ -1,5 +1,6 @@
 <template>
   <div class="search">
+    <!-- 搜索框 -->
     <div class="head">
       <div>
         <img src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/search2-2fb94833aa.png" alt="">
@@ -8,6 +9,7 @@
       </div>
       <div @click="cancel">取消</div>
     </div>
+    <!-- 搜索词语提示 -->
     <div class="searchtips" v-if="words">
       <div v-if="tipsData.length != 0">
         <div v-for="(item, index) in tipsData" :key="index" @click="searchWords" :data-value="item.name">
@@ -16,19 +18,21 @@
       </div>
       <div class="nogoods" v-else>数据库暂无此类商品...</div>
     </div>
-
+    <!-- 搜索历史记录 -->
     <div class="history" v-if="historyData.length!==0">
+      <!-- 删除 -->
       <div class="t">
         <div>历史记录</div>
         <div @click="clearHistory"></div>
       </div>
+      <!-- 搜索词 -->
       <div class="cont">
         <div v-for="(item, index) in historyData" :key="index" @click="searchWords" :data-value="item.keyword">
           {{item.keyword}}
         </div>
       </div>
     </div>
-
+    <!-- 热门搜索 -->
     <div class="history hotsearch">
       <div class="t">
         <div>热门搜索</div>
@@ -78,10 +82,12 @@ export default {
     this.getHotData()
   },
   methods: {
+    // 取消input框输入
     clearInput() {
       this.words = ''
       this.listData = []
     },
+    // 取消按钮跳转
     cancel() {
       wx.navigateBack({
         delta: 1
@@ -95,6 +101,7 @@ export default {
         this.historyData = []
       }
     },
+    // 搜索关键词
     inputFocus() {
       // 商品清空
       this.listData = []
