@@ -96,11 +96,13 @@ export default {
         delta: 1
       })
     },
+    // 删除全部历史记录
     async clearHistory() {
       const data = await post('/search/clearhistoryAction', {
         openId: this.openid
       })
       if (data) {
+        // 清除成功，页面数据清空
         this.historyData = []
       }
     },
@@ -111,11 +113,12 @@ export default {
       // 展示搜索提示信息
       this.tipsearch()
     },
-    //@input
+    //@input 搜索关键词跳转结果页面
     async tipsearch() {
       const data = await get('/search/helperaction', {
         keyword: this.words
       })
+      // 
       this.tipsData = data.keywords
     },
     // @confirm
@@ -148,6 +151,7 @@ export default {
         keyword: this.words,
         order: this.order
       })
+      // 
       this.listData = data.keywords
       this.tipsData = []
       console.log(data)

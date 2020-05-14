@@ -25,6 +25,7 @@ async function indexAction(ctx) {
 async function helperAction(ctx) {
   const keyword = ctx.query.keyword
   var order = ctx.query.order
+  // 兼容多接口
   if (!order) {
     order = ''
     orderBy = 'id'
