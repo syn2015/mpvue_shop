@@ -11,13 +11,13 @@
       </swiper>
       <button class="share" hover-class="none" open-type="share" value="">分享商品</button>
     </div>
-    <!--  -->
+    <!--商品保障  -->
     <div class="swiper-b">
       <div class="item">30天无忧退货</div>
       <div class="item">48小时快速退款</div>
       <div class="item">满88元免邮费</div>
     </div>
-    <!--  -->
+    <!-- 商品描述 -->
     <div class="goods-info">
       <div class="c">
         <p>{{info.name}}</p>
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <!--  -->
+    <!--规格数量  -->
     <div class="section-nav" @click="showType">
       <div>请选择规格数量</div>
       <div></div>
@@ -129,11 +129,11 @@ import wxParse from 'mpvue-wxparse'
 export default {
   data () {
     return {
-      gallery: [], // banner
-      id: '',
-      openId: '',
-      info: {},
-      brand: {},
+      gallery: [],  // banner图
+      id: '',       //商品id
+      openId: '',   //openid
+      info: {},     //商品描述
+      brand: {},    //制造商
       showpop: false,
       number: 0,
       attribute: [],
@@ -151,7 +151,7 @@ export default {
   },
   // 商品分享
   onShareAppMessage() {
-    console.log(this.info.name)
+    console.log('this.info.name是,',this.info.name)
     return {
       title: this.info.name,
       path: '/pages/goods/main?id' + this.info.id,
@@ -185,6 +185,7 @@ export default {
       this.allnumber = data.allnumber
       this.allPrice = data.info.retail_price
     },
+    // 弹出规格层
     showType () {
       this.showpop = !this.showpop
     },

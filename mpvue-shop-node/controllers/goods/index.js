@@ -49,6 +49,7 @@ async function detailAction(ctx) {
   }
 
   ctx.body = {
+    // info是数组，默认返回是第一个元素对象
     'info': info[0] || [],
     'gallery': gallery,
     'attribute': attribute,
