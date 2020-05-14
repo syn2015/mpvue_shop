@@ -121,7 +121,7 @@ export default {
       // 
       this.tipsData = data.keywords
     },
-    // @confirm
+    // @confirm 搜索对应关键词
     async searchWords(e) {
       // 
       console.log('input小程序的值，',e.currentTarget.dataset.value);
@@ -135,6 +135,7 @@ export default {
       console.log('data获取历史记录，',data)
       // 获取历史数据
       this.getHotData()
+      // 展示搜索词对应商品
       this.getlistData()
     },
     // 
@@ -144,7 +145,7 @@ export default {
       this.hotData = data.hotKeywordList
       console.log("getHotData,",data)
     },
-    // 
+    // 展示搜索词对应商品
     async getlistData () {
       // 获取商品列表
       const data  = await get('/search/helperaction', {
@@ -153,10 +154,11 @@ export default {
       })
       // 
       this.listData = data.keywords
+      // 清空提示词
       this.tipsData = []
-      console.log(data)
+      console.log('展示搜索词对应商品,getlistData:',data)
     },
-    // 
+    // 切换tabbar
     changeTab(index) {
       this.nowIndex = index
       if (index === 1) {
@@ -164,6 +166,7 @@ export default {
       } else {
         this.order = ''
       }
+      // 根据tabbar，重新请求数据
       this.getlistData()
     },
     // 

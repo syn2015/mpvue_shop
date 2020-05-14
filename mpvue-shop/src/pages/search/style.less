@@ -116,6 +116,7 @@
     background: #fff;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+    // tabbar
     .sortnav{
       display: flex;
       width: 100%;
@@ -135,19 +136,23 @@
         background: url(//yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/no-3127092a69.png) 165rpx center no-repeat;
         background-size: 15rpx 21rpx;
       }
+      // 升序的图片
       .active.desc {
         background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/down-95e035f3e5.png) 165rpx center no-repeat;
         background-size: 15rpx 21rpx;
       }
+      // 降序的图片
       .active.asc {
         background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/up-636b92c0a5.png) 165rpx center no-repeat;
         background-size: 15rpx 21rpx;
       }
     }
+    // 对应的商品
     .sortlist{
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
+      // 每件商品
       .item{
         box-sizing: border-box;
         width: 50%;
@@ -174,15 +179,18 @@
           color: #b4282d;
         }
       }
+      // 偶数商品去掉border-right
       .item:nth-child(2n) {
         border-right: none;
       }
+      // 最后一个和最后第二个商品去掉border-bottom
       .item.active:nth-last-child(1) {
         border-bottom: none;
       }
       .item.active:nth-last-child(2) {
         border-bottom: none;
       }
+      // 
       .item.none:last-child{
         border-bottom: none;
       }
