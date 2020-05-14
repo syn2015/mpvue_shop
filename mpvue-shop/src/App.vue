@@ -1,6 +1,7 @@
 <script>
 export default {
   created () {
+    // 测试号
     // 调用API从本地缓存中获取数据
     var userInfo = {
       openId: "oQmbb4sNZdxaUQZ0sfYgvtOP2S7c",
@@ -14,6 +15,7 @@ export default {
       watermark: { timestamp: 1535513485, appid: "wx601ce71bde7b9add" }
     };
     var openId = userInfo.openId;
+    // 全局共享
     wx.setStorageSync("userInfo", userInfo);
     wx.setStorageSync("openId", openId);
     /*

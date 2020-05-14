@@ -1,7 +1,7 @@
 // 引入koa,并实例化app
 const Koa = require('koa')
 const app = new Koa()
-// 
+// 引入koa-bodyparser中间件解析post数据
 const bodyParser = require('koa-bodyparser')
 // 引入数据库配置
 const config = require('./config')
