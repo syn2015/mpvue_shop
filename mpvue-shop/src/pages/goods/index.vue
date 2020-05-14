@@ -1,5 +1,6 @@
 <template>
   <div class="goods">
+    <!--  -->
     <div class="swiper">
       <swiper class="swiper-container" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
         <blok v-for="(item, index) in gallery" :key="index">
@@ -10,11 +11,13 @@
       </swiper>
       <button class="share" hover-class="none" open-type="share" value="">分享商品</button>
     </div>
+    <!--  -->
     <div class="swiper-b">
       <div class="item">30天无忧退货</div>
       <div class="item">48小时快速退款</div>
       <div class="item">满88元免邮费</div>
     </div>
+    <!--  -->
     <div class="goods-info">
       <div class="c">
         <p>{{info.name}}</p>
@@ -25,6 +28,7 @@
         </div>
       </div>
     </div>
+    <!--  -->
     <div class="section-nav" @click="showType">
       <div>请选择规格数量</div>
       <div></div>
@@ -120,6 +124,7 @@
 
 <script>
 import { get, post } from '../../utils'
+// 
 import wxParse from 'mpvue-wxparse'
 export default {
   data () {
@@ -153,19 +158,22 @@ export default {
       imageUrl: this.gallery[0].img_url
     }
   },
+  // mounted，生命周期
   mounted () {
     this.openId = wx.getStorageSync('openId') || '';
+    // 
     this.id = this.$root.$mp.query.id
     console.log(this.id, '------')
     this.goodsDetail()
   },
   methods: {
+    // 获取详情数据
     async goodsDetail () {
       const data = await get('/goods/detailaction', {
         id: this.id,
         openId: this.openId
       })
-      console.log(data)
+      console.log('goodsDetail,详情数据：',data)
       this.info = data.info
       this.gallery = data.gallery
       this.attribute = data.attribute
