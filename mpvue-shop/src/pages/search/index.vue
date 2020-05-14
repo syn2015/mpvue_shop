@@ -85,12 +85,12 @@ export default {
     this.getHotData()
   },
   methods: {
-    // 取消input框输入
+    // 取消input框输入，并隐藏商品列表
     clearInput() {
       this.words = ''
       this.listData = []
     },
-    // 取消按钮跳转
+    // 取消按钮跳转上一页
     cancel() {
       wx.navigateBack({
         delta: 1
@@ -106,7 +106,7 @@ export default {
         this.historyData = []
       }
     },
-    // 搜索关键词
+    // 搜索关键词，聚焦同时隐藏搜索提示信息
     inputFocus() {
       // 商品清空
       this.listData = []
@@ -169,7 +169,7 @@ export default {
       // 根据tabbar，重新请求数据
       this.getlistData()
     },
-    // 
+    // 跳转商品详情
     goodsDetail (id) {
       wx.navigateTo({
         url: '/pages/goods/main?id=' + id
