@@ -111,7 +111,7 @@
       background-size: 100% 100%;
     }
   }
-  // 规格弹出层
+  // 规格弹出层的蒙层
   .pop{
     position: fixed;
     top: 0;
@@ -120,6 +120,7 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
   }
+  // 弹出的规格层
   .attr-pop{
     position: fixed;
     width: 100%;
@@ -129,10 +130,12 @@
     box-sizing: border-box;
     padding: 30rpx;
     background: #fff;
+    // 商品和价格
     .top{
       display: flex;
       margin-bottom: 35rpx;
       position: relative;
+      // 关闭x
       .close{
         position: absolute;
         right: 0;
@@ -140,6 +143,7 @@
         font-size: 30rpx;
         color: #999;
       }
+      // 商品的小图片
       .left{
         float: left;
         height: 177rpx;
@@ -151,6 +155,7 @@
           width: 177rpx;
         }
       }
+      // 数量和价格
       .right{
         flex: 1;
         display: flex;
@@ -159,12 +164,15 @@
           width: 100%;
           line-height: 45rpx;
         }
+        // 价格
         p:nth-child(1){
           color: #b4282d;
         }
       }
     }
+    // 数量b
     .b{
+      // 加减框
       .count{
         width: 322rpx;
         height: 71rpx;
@@ -172,10 +180,12 @@
         display: flex;
         border: 1rpx solid #ccc;
         margin-top: 20rpx;
+        // 加减号
         div{
           width: 90rpx;
           text-align: center;
         }
+        // 输入框
         input{
           flex: 1;
           height: 100%;
@@ -186,27 +196,33 @@
       }
     }
   }
+  // y轴移动动画，向上500rpx
   .fadeup{
     transform: translateY(-500rpx);
   }
+  // 商品参数
   .attribute{
     padding: 20rpx 30rpx;
     background-color: #fff;
     margin-bottom: 20rpx;
+
     .head{
       font-size: 38rpx;
       padding: 20rpx 0;
     }
+    // 
     .item{
       display: flex;
       background: #f7f7f7;
       padding: 20rpx 0;
       margin: 20rpx;
+      // 名称
       div:nth-child(1) {
         width: 134rpx;
         font-size: 25rpx;
         color: #999;
       }
+      // 参数
       div:nth-child(2) {
         flex: 1;
         overflow: hidden;
@@ -215,6 +231,7 @@
       }
     }
   }
+  // 
   .common-problem{
     margin-bottom: 110rpx;
     .h{

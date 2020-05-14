@@ -13,7 +13,7 @@ async function detailAction(ctx) {
     'goods_id': goodsId
   })
   // 商品参数 
-  // 关联查询两张表leftJoin
+  // 关联查询两张表leftJoin：nideshop_goods_attribute，nideshop_attribute
   const attribute = await mysql('nideshop_goods_attribute').column('nideshop_goods_attribute.value', 'nideshop_attribute.name').leftJoin('nideshop_attribute', 'nideshop_goods_attribute.attribute_id', 'nideshop_attribute.id').where({
     'nideshop_goods_attribute.goods_id': goodsId
   }).select()

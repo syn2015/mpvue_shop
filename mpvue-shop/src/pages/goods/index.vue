@@ -47,6 +47,7 @@
 
     <!-- 图片展示 -->
     <div class="detail" v-if="goods_desc">
+      <!-- wxparse，mpvue组件,解析富文本插件 -->
       <wxParse :content="goods_desc" />
     </div>
 
@@ -96,8 +97,11 @@
     </div>
 
     <!-- 选择规格的弹出层 -->
+    <!-- 蒙层 -->
     <div class="pop" v-show="showpop" @click="showType"></div>
+    <!-- 弹出的规格层 -->
     <div class="attr-pop" :class="[showpop ? 'fadeup' : 'fadedown']">
+      <!-- 商品和价格 -->
       <div class="top">
         <div class="left">
           <img :src="info.primary_pic_url" alt="">
@@ -110,10 +114,12 @@
         </div>
         <div class="close" @click="showType">✖️</div>
       </div>
+      <!-- 数量b和加减框 -->
       <div class="b">
         <p>数量</p> 
         <div class="count">
           <div class="cut" @click="reduce">-</div>
+          <!-- 禁用输入框输入 -->
           <input type="text" class="number" v-model="number" disabled="false">
           <div class="add" @click="add">+</div>
         </div>
@@ -124,7 +130,7 @@
 
 <script>
 import { get, post } from '../../utils'
-// 
+// 引入mpvue-wxparse
 import wxParse from 'mpvue-wxparse'
 export default {
   data () {
@@ -136,8 +142,8 @@ export default {
       brand: {},    //制造商
       showpop: false,
       number: 0,
-      attribute: [],
-      goods_desc: '',
+      attribute: [], //商品参数
+      goods_desc: '', // 图片列表（微信组件）
       issueList: [], // 常见问题
       productList: [],
       collectFlag: false,
@@ -146,6 +152,7 @@ export default {
       allPrice: ''
     }
   },
+  // 引入组件
   components: {
     wxParse
   },
@@ -189,16 +196,20 @@ export default {
     showType () {
       this.showpop = !this.showpop
     },
+    // 加法
     add () {
       this.number += 1
     },
+    // 减法
     reduce () {
       if (this.number > 1) {
         this.number -= 1
       } else {
+        // 结束
         return false
       }
     },
+    // 
     async collect () {
       this.collectFlag = !this.collectFlag
       const data = await post('/collect/addcollect', {
@@ -272,6 +283,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+// 引入mpvue的wxParse组件的样式
 @import url('~mpvue-wxparse/src/wxParse.css');
 @import './style.less';
 </style>
