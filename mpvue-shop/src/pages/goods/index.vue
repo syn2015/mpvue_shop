@@ -171,7 +171,8 @@ export default {
   // mounted，生命周期
   mounted () {
     this.openId = wx.getStorageSync('openId') || '';
-    // 
+    // mpvue获取上一个页面url中传递的值
+    // vue获取上一个页面url中传递的值this.$root.query.id
     this.id = this.$root.$mp.query.id
     console.log(this.id, '------')
     this.goodsDetail()
@@ -270,11 +271,13 @@ export default {
           })
           return false
         }
+        // 后端更新数量
         const data = await post('cart/addCart', {
           openId: this.openId,
           goodsId: this.goodsId,
           number: this.number
         })
+        // 前端更新数量
         if (data) {
           this.allnumber = this.allnumber + this.number
           wx.showToast({

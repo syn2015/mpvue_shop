@@ -1,6 +1,6 @@
 const { mysql } = require('../../mysql')
 
-// 
+// 提交订单
 async function submitAction (ctx) {
   const { openId } = ctx.request.body
   let goodsId = ctx.request.body.goodsId
@@ -47,7 +47,7 @@ async function submitAction (ctx) {
   }
 }
 
-// 
+// 订单详情
 async function detailAction (ctx) {
   const openId = ctx.query.openId
   const addressId = ctx.query.addressId || ''
