@@ -83,9 +83,11 @@
 
     <!-- footer -->
     <div class="bottom-fixed">
+      <!-- 收藏图标 -->
       <div class="collect-box" @click="collect">
         <div class="collect" :class="[collectFlag ? 'active' : '']"></div>
       </div>
+      <!-- 购物车图标 -->
       <div class="car-box" @click="toCart">
         <div class="car" >
           <span>{{allnumber}}</span>
@@ -145,7 +147,7 @@ export default {
       attribute: [], //商品参数
       goods_desc: '', // 图片列表（微信组件）
       issueList: [], // 常见问题
-      productList: [],
+      productList: [], // 大家都在看
       collectFlag: false,
       goodsId: '',
       allnumber: 0,

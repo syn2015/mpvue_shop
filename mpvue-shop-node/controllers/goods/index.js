@@ -18,10 +18,10 @@ async function detailAction(ctx) {
     'nideshop_goods_attribute.goods_id': goodsId
   }).select()
 
-  // 常见问题
+  // 常见问题，nideshop_goods_issue
   const issue = await mysql('nideshop_goods_issue').select()
 
-  // 大家都在看
+  // 大家都在看 nideshop_goods
   const productList = await mysql('nideshop_goods').where({
     'category_id': info[0].category_id
   }).select()

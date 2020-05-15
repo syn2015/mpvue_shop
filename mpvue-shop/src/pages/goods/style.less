@@ -231,7 +231,7 @@
       }
     }
   }
-  // 
+  // 常见问题
   .common-problem{
     margin-bottom: 110rpx;
     .h{
@@ -241,6 +241,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      // 常见问题
       .title{
         padding: 0 25rpx;
         background: #fff;
@@ -251,8 +252,10 @@
       background: #fff;
       .item{
         padding-bottom: 25rpx;
+        // 问题的每一项
         .question-box{
           display: flex;
+          // 
           .spot{
             width: 8rpx;
             height: 8rpx;
@@ -260,6 +263,7 @@
             border-radius: 50%;
             margin-top: 11rpx;
           }
+          // 
           .question{
             line-height: 30rpx;
             padding-left: 8rpx;
@@ -269,6 +273,7 @@
             color: #303030;
           }
         }
+        // 问题对应的解答
         .answer{
           line-height: 40rpx;
           padding-left: 16rpx;
@@ -277,6 +282,7 @@
         }
       }
     }
+    // 大家都在看
     .sublist{
       display: flex;
       flex-wrap: wrap;
@@ -298,18 +304,21 @@
           margin-bottom: 5rpx;
           text-indent: 1em;
         }
+        // 商品名称
         p:nth-child(2) {
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
           width: 98%;
         }
+        // 价钱
         p:nth-child(3) {
           color: #9c3232;
         } 
       }
     }
   }
+  // footer
   .bottom-fixed{
     position: fixed;
     bottom: 0;
@@ -320,6 +329,7 @@
     display: flex;
     background: #fff;
     z-index: 10;
+    // 收藏等
     .collect-box{
       height: 100rpx;
       width: 162rpx;
@@ -327,6 +337,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      // 收藏图标
       .collect{
         display: block;
         height: 44rpx;
@@ -334,6 +345,7 @@
         background: url('../../../static/images/icon_collect.png') no-repeat;
         background-size: 100% 100%;
       }
+      // 点击收藏
       .collect.active{
         display: block;
         height: 44rpx;
@@ -342,6 +354,7 @@
         background-size: 100% 100%;
       }
     }
+    // 购物车图标
     .car-box{
       height: 100rpx;
       width: 162rpx;
@@ -349,10 +362,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      // 
       .car{
         position: relative;
         width: 60rpx;
         height: 60rpx;
+        // 提醒消息
         span{
           position: absolute;
           top: 0;
@@ -367,6 +382,7 @@
           line-height: 28rpx;
           border-radius: 50%;
         }
+        // 购物车图
         img{
           display: block;
           height: 44rpx;
@@ -377,6 +393,7 @@
         }
       }
     }
+    // 立即购买
     div:nth-child(3) {
       height: 100rpx;
       line-height: 96rpx;
@@ -386,6 +403,7 @@
       border-top: 1rpx solid #f4f4f4;
       border-bottom: 1rpx solid #f4f4f4;
     }
+    // 加入购物车
     div:nth-child(4) {
       height: 100rpx;
       line-height: 96rpx;
