@@ -1,5 +1,6 @@
 const { mysql } = require('../../mysql')
 
+// 
 async function submitAction (ctx) {
   const { openId } = ctx.request.body
   let goodsId = ctx.request.body.goodsId
@@ -8,6 +9,7 @@ async function submitAction (ctx) {
   const isOrder = await mysql('nideshop_order').where({
     'user_id': openId
   }).select()
+  // 更新订单的总价，user_id,goods_id
   if (isOrder.length > 0) {
     const data = await mysql('nideshop_order').where({
       'user_id': openId
@@ -16,6 +18,7 @@ async function submitAction (ctx) {
       goods_id: goodsId,
       allprice: allPrice
     })
+    // 
     if (data) {
       ctx.body = {
         data: true
@@ -26,6 +29,7 @@ async function submitAction (ctx) {
       }
     }
   } else {
+    // 插入新订单
     const data = await mysql('nideshop_order').insert({
       user_id: openId,
       goods_id: goodsId,
@@ -43,6 +47,7 @@ async function submitAction (ctx) {
   }
 }
 
+// 
 async function detailAction (ctx) {
   const openId = ctx.query.openId
   const addressId = ctx.query.addressId || ''

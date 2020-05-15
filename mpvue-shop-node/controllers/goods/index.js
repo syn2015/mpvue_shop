@@ -32,11 +32,12 @@ async function detailAction(ctx) {
     'value_id': goodsId
   }).select()
   let collected = false
+  // 存在收藏的情况
   if (iscollect.length > 0) {
     collected = true
   }
 
-  // 判断该用户的购物车里是否含有此商品
+  // 判断该用户的购物车里是否含有此商品 nideshop_cart
   const oldNumber = await mysql('nideshop_cart').where({
     'user_id': openId
   }).column('number').select()

@@ -85,6 +85,7 @@
     <div class="bottom-fixed">
       <!-- 收藏图标 -->
       <div class="collect-box" @click="collect">
+        <!-- 点击收藏，同时存入后端 -->
         <div class="collect" :class="[collectFlag ? 'active' : '']"></div>
       </div>
       <!-- 购物车图标 -->
@@ -142,16 +143,16 @@ export default {
       openId: '',   //openid
       info: {},     //商品描述
       brand: {},    //制造商
-      showpop: false,
-      number: 0,
+      showpop: false, // 是否弹出规格层
+      number: 0,      // 购物数量
       attribute: [], //商品参数
       goods_desc: '', // 图片列表（微信组件）
       issueList: [], // 常见问题
       productList: [], // 大家都在看
-      collectFlag: false,
-      goodsId: '',
-      allnumber: 0,
-      allPrice: ''
+      collectFlag: false, // 是否收藏，默认没有
+      goodsId: '',    //商品ID
+      allnumber: 0,   //消息图标
+      allPrice: ''    // 商品总价
     }
   },
   // 引入组件
@@ -211,7 +212,7 @@ export default {
         return false
       }
     },
-    // 
+    // 收藏
     async collect () {
       this.collectFlag = !this.collectFlag
       const data = await post('/collect/addcollect', {
@@ -219,11 +220,13 @@ export default {
         goodsId: this.goodsId
       })
     },
+    // 去往购物车
     toCart () {
       wx.switchTab({
         url: '/pages/cart/main'
       });  
     },
+    // 立即购买
     async buy () {
       if (this.showpop) {
         if (this.number === 0) {
@@ -231,9 +234,11 @@ export default {
             title: '请选择商品数量',
             duration: 2000,
             icon: 'none',
+            // mask为true，显示遮罩层
             mask: true,
             success: res => {}
           })
+          // 停止
           return false
         }
         const data = await post('/order/submitAction', {
@@ -248,9 +253,11 @@ export default {
             
         }
       } else {
+        // 弹出规格层
         this.showpop = true
       }
     },
+    // 加入购物车
     async addCart () {
       if (this.showpop) {
         if (this.number == 0) {

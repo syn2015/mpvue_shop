@@ -27,7 +27,7 @@ router.get('/goods/detailaction', controllers.goods.index.detailAction)
 router.get('/goods/goodsList', controllers.goods.index.goodsList)
 
 
-// 收藏相关的接口
+// 收藏相关的接口，点击收藏图标时候调用
 router.post('/collect/addcollect', controllers.collect.index.addCollect)
 
 
