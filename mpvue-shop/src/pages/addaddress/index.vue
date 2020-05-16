@@ -42,8 +42,8 @@ export default {
       telNumber: '',
       region: [],  //picker 地址
       customItem: '全部',// 自定义项，
-      address: '',
-      detailaddress: '',
+      address: '',  //收货地址
+      detailaddress: '', //收获详细地址
       checked: false,
       openId: '',
       res: '',
@@ -86,20 +86,22 @@ export default {
       this.detailaddress = detail.address_detail
       this.checked = detail.is_default === 1 ? true : false
     },
-    // 
+    // checkbox的change事件
     checkboxChange (e) {
+      // 获取checked的值,e.mp.detail.value[0]
       this.checked = e.mp.detail.value[0]
     },
-    // 
+    // pick级联地址的change事件,e.mp.detail.value
     bindRegionChange (e) {
-      console.log(e)
+      console.log('mpvue中的picker组件的change事件:',e)
       let value = e.mp.detail.value
       this.address = `${value[0]} ${value[1]} ${value[2]}`
     },
+    // 一键导入微信
     wxaddress () {
       wx.chooseAddress({
         success: (result) => {
-          console.log(result)
+          console.log(' wx.chooseAddress,',result)
           this.userName = result.userName
           this.telNumber = result.telNumber
           this.address = `${result.provinceName} ${result.cityName} ${result.countyName}`
@@ -114,6 +116,7 @@ export default {
     async saveAddress () {
       const data = await post('/address/saveAction', {
         userName: this.userName,
+        // 需要添加电话格式校验
         telNumber: this.telNumber,
         address: this.address,
         detailaddress: this.detailaddress,
@@ -129,6 +132,7 @@ export default {
           duration: 2000,
           mask: true,
           success: (result) => {
+            // 延迟跳转页面，setTimeout需要修改为箭头函数
             setTimeout(() => {
               wx.navigateBack({
                 delta: 1

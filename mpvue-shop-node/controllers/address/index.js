@@ -28,13 +28,16 @@ async function saveAction(ctx) {
   const addressId = ctx.request.body.addressId
   const { userName, telNumber, address, detailaddress, checked, openId } = ctx.request.body
   console.log(checked)
+  // 默认地址应该是唯一的
   // 如果是默认选中，现在数据库中查询是否是默认地址
   if (checked) {
     const isDefault = await mysql('nideshop_address').where({
       'user_id': openId,
       'is_default': 1
     }).select()
+    // 存在默认地址
     if (isDefault.length > 0) {
+      // 更新原有默认地址为普通地址
       await mysql('nideshop_address').where({
         'user_id': openId,
         'is_default': 1
