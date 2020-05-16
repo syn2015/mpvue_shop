@@ -55,12 +55,15 @@ async function detailAction (ctx) {
     'user_id': openId
   }).select()
   var goodsIds = orderDetail[0].goods_id.split(',')
-
+  console.log('goodsIds,split后：',goodsIds)
+  // whereIn()
   const list = await mysql('nideshop_cart').andWhere({
     'user_id': openId
   }).whereIn('goods_id', goodsIds).select()
+  console.log('list,根据goodsIds查询：',list)
   // 收货地址
   var addressList;
+  // 传递来的地址存在
   if (addressId) {
     addressList = await mysql('nideshop_address').where({
       'user_id': openId,

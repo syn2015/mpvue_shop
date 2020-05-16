@@ -1,6 +1,8 @@
 <template>
   <div class="order">
+    <!--  -->
     <div class="address" v-if="address.name" @click="toAddressList">
+      <!-- 一项地址 -->
       <div class="item">
         <div class="list">
           <div class="addresslist">
@@ -12,13 +14,15 @@
               <p>{{address.mobile}}</p>
               <p>{{address.address+address.address_detail}}</p>
             </div>
+            <!-- 箭头图标 -->
             <div></div>
           </div>
         </div>
       </div>
     </div>
+    <!-- v-else 请选择默认地址 -->
     <div class="seladdress" v-else @click="toAdd">请选择默认地址</div>
-
+   <!--  -->
     <div class="orderbox">
       <div class="item">
         <div>商品合计</div>
@@ -33,13 +37,13 @@
         <div>暂无</div>
       </div>
     </div>
-
+    <!-- 商品 -->
     <div class="cartlist">
       <div class="item" v-for="(item, index) in listData" :key="index">
         <div class="con">
           <div class="left">
             <div class="img">
-              <img :src="item.list_pic_url" alt="">
+              <img :src="item.list_pic_url" alt />
             </div>
             <div class="info">
               <p>{{item.goods_name}}</p>
@@ -52,7 +56,7 @@
         </div>
       </div>
     </div>
-
+    <!-- 支付  -->
     <div class="bottom">
       <div>实付：¥ {{allprice}}</div>
       <div class="pay" @click="pay">支付</div>
@@ -61,64 +65,73 @@
 </template>
 
 <script>
-import { get, post, getStorageOpenid } from '../../utils'
+import { get, post, getStorageOpenid } from "../../utils";
 export default {
-  data () {
+  data() {
     return {
       address: {},
-      price: '',
-      allprice: '',
-      openId: '',
-      addressId: '',
+      price: "",
+      allprice: "",
+      openId: "",
+      addressId: "",
       listData: []
-    }
+    };
   },
-  onShow () {
-    if (wx.getStorageSync('addressId')) {
-      this.addressId = wx.getStorageSync('addressId')
+  // 获取数据，放到小程序自带的onShow()中
+  onShow() {
+    if (wx.getStorageSync("addressId")) {
+      // 取出本地存储中的addressId
+      this.addressId = wx.getStorageSync("addressId");
     }
-    this.openId = getStorageOpenid()
-    this.getDetail()
+    // 获取openid
+    this.openId = getStorageOpenid();
+    this.getDetail();
   },
   methods: {
-    toAddressList () {
+    // 跳转选择收货地址
+    toAddressList() {
       wx.navigateTo({
-        url: '/pages/addressSelect/main'
-      })
+        url: "/pages/addressSelect/main"
+      });
     },
-    toAdd () {
+    // 跳转添加收货地址
+    toAdd() {
       wx.navigateTo({
-        url: '/pages/addaddress/main'
-      })
+        url: "/pages/addaddress/main"
+      });
     },
-    async getDetail () {
-      const data = await get('/order/detailAction', {
+    // 获取订单信息
+    async getDetail() {
+      const data = await get("/order/detailAction", {
         openId: this.openId,
         addressId: this.addressId
-      })
-      console.log(data)
+      });
+      console.log('getDateil,接口返回的data:',data);
       if (data) {
         // this.allprice = data.price
-        this.listData = data.goodsList
-        this.address = data.address
+        this.listData = data.goodsList;
+        this.address = data.address;
       }
-      this.listData.map((item) => {
-        this.allprice = Number(item.retail_price * item.number) + Number(this.allprice)
-      })
+      // 计算总价
+      this.listData.map(item => {
+        this.allprice =
+          Number(item.retail_price * item.number) + Number(this.allprice);
+      });
     },
-    pay () {
+    // 
+    pay() {
       wx.showToast({
-        title: '支付功能暂未开发',
-        icon: 'none',
+        title: "支付功能暂未开发",
+        icon: "none",
         duration: 1500,
         mask: false,
         success: res => {}
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
-@import './style.less';
+@import "./style.less";
 </style>

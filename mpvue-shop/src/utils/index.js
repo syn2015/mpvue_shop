@@ -60,7 +60,7 @@ export function get (url, data) {
 export function post (url, data) {
   return request(url, 'POST', data)
 }
-
+// 获取openid
 export function getStorageOpenid() {
   const openId = wx.getStorageSync('openId')
   if (openId) {
