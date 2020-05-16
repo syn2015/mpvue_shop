@@ -3,6 +3,7 @@ const { mysql } = require('../../mysql')
 // 获取收货地址列表
 async function getListAction(ctx) {
   const openId = ctx.query.openId
+  // is_default 按照desc降序排列，第一条即是默认地址（is_default:1）
   const addressList = await mysql('nideshop_address').where({
     'user_id': openId
   }).orderBy('is_default', 'desc').select()
