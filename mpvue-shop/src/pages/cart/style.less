@@ -1,9 +1,11 @@
 .cart {
   overflow-x: hidden;
+  // 权益
   .top {
     display: flex;
     justify-content: space-between;
     padding: 30rpx 20rpx;
+    // 权益三项
     div {
       background: url(http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/servicePolicyRed-518d32d74b.png) 0 center no-repeat;
       background-size: 10rpx;
@@ -14,6 +16,7 @@
       color: #666;
     }
   }
+  // 商品列表
   .cartlist {
     background: #fff;
     margin-bottom: 110rpx;
@@ -22,6 +25,7 @@
       border-bottom: 1rpx solid #f4f4f4;
       height: 166rpx;
       position: relative;
+      // 每项上坪
       .con {
         display: flex;
         align-items: center;
@@ -31,6 +35,7 @@
           display: flex;
           align-items: center;
           width: 80%;
+          // 未选中图标
           .icon {
             height: 125rpx;
             width: 34rpx;
@@ -38,10 +43,12 @@
             background-size: 34rpx 34rpx;
             margin: 0 20rpx;
           }
+          // 选中后的图标
           .icon.active {
             background: url(http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/checkbox-checked-822e54472a.png) no-repeat center center;
             background-size: 34rpx 34rpx;
           }
+          // 商品图片
           .img {
             height: 125rpx;
             width: 125rpx;
@@ -52,6 +59,7 @@
               height: 100%;
             }
           }
+          // 商品名称和价钱
           .info {
             width: 50%;
             padding: 20rpx;
@@ -60,29 +68,32 @@
             }
           }
         }
+        // 商品数量
         .right {
           padding-right: 50rpx;
         }
       }
-      .delete {
-        position: absolute;
-        width: 100rpx;
-        top: 0;
-        right: -100rpx;
-        text-align: center;
-        height: 100%;
-        background: #b4282d;
-        color: #fff;
-        transition: all 200ms ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        div {
-          color: #fff;
-        }
-      }
+      // 
+      // .delete {
+      //   position: absolute;
+      //   width: 100rpx;
+      //   top: 0;
+      //   right: -100rpx;
+      //   text-align: center;
+      //   height: 100%;
+      //   background: #b4282d;
+      //   color: #fff;
+      //   transition: all 200ms ease;
+      //   display: flex;
+      //   align-items: center;
+      //   justify-content: center;
+      //   div {
+      //     color: #fff;
+      //   }
+      // }
     }
   }
+  // 全选和下单
   .fixed {
     position: fixed;
     bottom: 0;
@@ -124,13 +135,13 @@
       }
     }
   }
-  .nogoods {
-    margin-top: 200rpx;
-    img {
-      margin: 0 auto;
-      display: block;
-      width: 258rpx;
-      height: 258rpx;
-    }
-  }
+  // .nogoods {
+  //   margin-top: 200rpx;
+  //   img {
+  //     margin: 0 auto;
+  //     display: block;
+  //     width: 258rpx;
+  //     height: 258rpx;
+  //   }
+  // }
 }

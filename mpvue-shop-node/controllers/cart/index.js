@@ -1,5 +1,5 @@
 const { mysql } = require('../../mysql')
-
+// 添加购物车
 async function addCart(ctx) {
   const { openId, goodsId, number } = ctx.request.body
 

@@ -1,30 +1,38 @@
 <template>
   <div class="cart">
+    <!-- 权益 -->
     <div class="top">
       <div>30天无忧退货</div>
       <div>48小时快速退款</div>
       <div>满88元免邮费</div>
     </div>
+    <!-- 商品列表 -->
     <div class="cartlist">
       <div class="item" v-for="(item, index) in listData" :key="index">
         <div class="con">
+          <!-- 选中图标和商品图片 -->
           <div class="left">
+            <!-- 选中图标 同时切换选择背景图片-->
             <div class="icon" @click="changeColor(index, item.goods_id)" :class="[Listids[index] ? 'active' : '']"></div>
+            <!-- 商品图片 -->
             <div class="img">
               <img :src="item.list_pic_url" alt="">
             </div>
+            <!-- 商品名称和价钱 -->
             <div class="info">
               <p>{{item.goods_name}}</p>
               <p>¥{{item.retail_price}}</p>
             </div>
+
           </div>
+          <!-- 商品数量 -->
           <div class="right">
             <div class="num">x {{item.number}}</div>
           </div>
         </div>
       </div>
     </div>
-
+    <!--  -->
     <div class="fixed">
       <div class="left" @click="allCheck" :class="{'active': allcheck}">
         全选({{isCheckedNumber}})
@@ -43,30 +51,35 @@ export default {
   data () {
     return {
       openId: '',
-      listData: [],
-      Listids: [],
+      listData: [],// 购物车数据
+      Listids: [],//存放所有商品ID
       allcheck: false
     }
   },
+  // 请求数据onShow()
   onShow () {
     this.openId = getStorageOpenid()
     this.getListData()
   },
   methods: {
+    // 请求购物车数据
     async getListData () {
       const data = await get('/cart/cartList', {
         openId: this.openId
       })
-      console.log(data)
+      console.log('购物车列表数据:',data)
       this.listData = data.data
     },
-    changeColor (index, id) {
+    // 单选
+    changeColor (index, goodsid) {
       if (this.Listids[index]) {
+        // vue中$set,动态修改数据源
         this.$set(this.Listids, index, false)
       } else {
-        this.$set(this.Listids, index, id)
+        this.$set(this.Listids, index, goodsid)
       }
     },
+    // 全选
     allCheck () {
       // 先清空选择
       this.Listids = []
@@ -74,13 +87,15 @@ export default {
         this.allcheck = false
       } else {
         this.allcheck = true
-        // 全部选择
+        // 全部选择，同时遍历所有商品项
         for (let i = 0; i < this.listData.length; i++) {
           const element = this.listData[i]
+          // 收集所有商品的ID
           this.Listids.push(element.goods_id)
         }
       }
     },
+    // 
     async orderDown () {
       if (this.Listids.length === 0) {
         wx.showToast({
@@ -112,6 +127,7 @@ export default {
     }
   },
   computed: {
+    // 计算属性：全选；同时用来做全选后的图标显示
     isCheckedNumber () {
       let number = 0
       for (let i = 0; i < this.Listids.length; i++) {
@@ -119,17 +135,21 @@ export default {
           number++
         }
       }
+      // Listids数组中的所有元素的长度是否等于统计所有元素后的number
       if (number == this.listData.length && number !== 0) {
+        // 全选图标亮起
         this.allcheck = true
       } else {
         this.allcheck = false
       }
       return number
     },
+    // 计算属性：总价
     allPrice () {
       let Price = 0
       for (let i = 0; i < this.Listids.length; i++) {
         if (this.Listids[i]) {
+          // 获取数据源中的价格和数量
           Price += this.listData[i].retail_price * this.listData[i].number
         }
       }
