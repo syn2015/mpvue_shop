@@ -88,8 +88,9 @@ export default {
       console.log('getAddressList,获取地址信息：',data);
       _this.listData = data.data;
     },
-    // 
+    // 选择收货地址传递地址ID并返回支付页面
     selAddress (id) {
+      // 存入本地地址ID
       wx.setStorageSync('addressId', id)
       wx.navigateBack({
         delta: 1

@@ -1,20 +1,24 @@
 <template>
   <div class="addaddress">
+    <!-- 姓名 -->
     <div class="item">
       <input type="text" placeholder="姓名" v-model="userName">
     </div>
+    <!-- 电话 -->
     <div class="item">
       <input type="text" placeholder="手机号码" v-model="telNumber">
     </div>
+    <!-- 地址  mode="region" 级联组件；：custom-item="customItem" 自定义项-->
     <div class="item">
       <picker mode="region" @change="bindRegionChange" :value="region" :custom-item="customItem">
         <input type="text" placeholder="身份、城市、区县" v-model="address">
       </picker>
     </div>
+    <!-- 详细地址 -->
     <div class="item">
       <input type="text" placeholder="详细地址，如楼道、楼盘号等" v-model="detailaddress">
     </div>
-
+    <!-- 设为默认地址 -->
     <div class="item itemend">
       <checkbox-group @change="checkboxChange">
         <label class="checkbox">
@@ -24,7 +28,7 @@
       </checkbox-group>
       <div @click="wxaddress">一键导入微信</div>
     </div>
-
+    <!-- 保存按钮 -->
     <div class="bottom" @click="saveAddress">保存</div>
   </div>
 </template>
@@ -36,8 +40,8 @@ export default {
     return {
       userName: '',
       telNumber: '',
-      region: [],
-      customItem: '全部',
+      region: [],  //picker 地址
+      customItem: '全部',// 自定义项，
       address: '',
       detailaddress: '',
       checked: false,
@@ -46,27 +50,35 @@ export default {
       id: ''
     }
   },
+  // mounted()请求数据
   mounted() {
     this.openId = getStorageOpenid()
+    // 上一页面是否带有参数res（是否从一键导入而来）
     if (this.$root.$mp.query.res) {
+      // decodeURIComponent解码
+      console.log('解码前的参数------',this.$root.$mp.query.res)
       this.res = JSON.parse(decodeURIComponent(this.$root.$mp.query.res))
-      console.log(this.res, '------')
+      console.log('解码后的参数------',this.res)
       this.userName = this.res.userName
       this.telNumber = this.res.telNumber
+      // 字符串拼接
       this.address = `${this.res.provinceName} ${this.res.cityName} ${this.res.countyName}`
       this.detailaddress = this.res.detailInfo
     }
+    // 上一页面是否带有参数id（是否从编辑地址而来）
     if (this.$root.$mp.query.id) {
       this.id = this.$root.$mp.query.id
       this.getDetail()
     }
   },
   methods: {
+    // 请求详细地址数据
     async getDetail () {
       const data = await get('/address/detailAction', {
         id: this.id
       })
-      console.log(data)
+      console.log('请求详细地址数据,',data)
+      // 渲染待编辑的数据
       let detail = data.data
       this.userName = detail.name
       this.telNumber = detail.mobile
@@ -74,9 +86,11 @@ export default {
       this.detailaddress = detail.address_detail
       this.checked = detail.is_default === 1 ? true : false
     },
+    // 
     checkboxChange (e) {
       this.checked = e.mp.detail.value[0]
     },
+    // 
     bindRegionChange (e) {
       console.log(e)
       let value = e.mp.detail.value
@@ -96,6 +110,7 @@ export default {
       });
         
     },
+    // 保存按钮
     async saveAddress () {
       const data = await post('/address/saveAction', {
         userName: this.userName,
@@ -106,7 +121,7 @@ export default {
         openId: this.openId,
         addressId: this.id
       })
-      console.log(data)
+      console.log('保存按钮，结果：',data)
       if (data.data) {
         wx.showToast({
           title: '添加成功',
