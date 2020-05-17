@@ -6,6 +6,7 @@ async function listAction (ctx) {
   const size = 5
   // 分页处理
   const data = await mysql('nideshop_topic').column('id', 'title', 'price_info', 'scene_pic_url', 'subtitle').limit(size).offset((page - 1) * size)
+  // 第一次请求
   const data1 = await mysql('nideshop_topic').column('id', 'title', 'price_info', 'subtitle').select()
   const total = parseInt(data1.length / 5)
 

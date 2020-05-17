@@ -19,7 +19,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "网易严选",
+    "navigationBarTitleText": "严选购物",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
   },
