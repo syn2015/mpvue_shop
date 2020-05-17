@@ -1,5 +1,6 @@
 <template>
   <div class="topic">
+    <!--  -->
     <ui class="list">
       <li v-for="(item, index) in topicList" :key="index" @click="topicDetail(item.id)">
         <div class="t-img">
@@ -25,11 +26,13 @@ export default {
       total: ''
     }
   },
+  // 
   onPullDownRefresh () {
     this.page = 1
     this.getListData()
     wx.stopPullDownRefresh()
   },
+  // 
   onReachBottom () {
     this.page = this.page + 1
     if (this.page > this.total) {
@@ -37,10 +40,12 @@ export default {
     }
     this.getListData()
   },
+  // 
   mounted () {
     this.getListData(true)
   },
   methods: {
+    // 
     async getListData (first) {
       const data = await get ('/topic/listaction', {
         page: this.page
@@ -53,6 +58,7 @@ export default {
         this.topicList = this.topicList.concat(data.data)
       }
     },
+    // 
     topicDetail (id) {
       wx.navigateTo({
         url: '/pages/topicdetail/main?id=' + id

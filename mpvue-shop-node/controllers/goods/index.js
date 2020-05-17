@@ -65,7 +65,9 @@ async function detailAction(ctx) {
 async function goodsList(ctx) {
   const categoryId = ctx.query.categoryId
   let goodsList = []
+
   if (categoryId) {
+    // 
     goodsList = await mysql('nideshop_goods').where({
       'category_id': categoryId
     }).select()
@@ -79,10 +81,12 @@ async function goodsList(ctx) {
         'parent_id': categoryId
       }).column('id').select()
       if (subIds.length !== 0) {
+        // 收集子类的id
         subIds = subIds.map((item) => {
           return item.id
         })
       }
+      // 相关的子类，查找与子类的商品并分页
       goodsList = await mysql('nideshop_goods').whereIn('category_id', subIds).limit(50).select()
     }
 

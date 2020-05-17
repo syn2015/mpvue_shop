@@ -7,7 +7,7 @@ async function categoryNav(ctx) {
   const currentNav = await mysql('nideshop_category').where({
     'id': categoryId
   }).select()
-  // 获取它的同类
+  // 获取它的同类，currentNav[0].parent_id
   const navData = await mysql('nideshop_category').where({
     'parent_id': currentNav[0].parent_id
   }).select()
