@@ -95,8 +95,9 @@ export default {
         }
       }
     },
-    // 
+    // 下单按钮
     async orderDown () {
+      // 没选中商品
       if (this.Listids.length === 0) {
         wx.showToast({
           title: '请选择商品',
@@ -109,16 +110,19 @@ export default {
       let newgoodsid = []
       for (let i = 0; i < this.Listids.length; i++) {
         const element = this.Listids[i]
+        // 保险一些，除去数组元素为空的情况
         if (element) {
           newgoodsid.push(element)
         }
       }
+      // 转为字符串
       let goodsId = newgoodsid.join(',')
       const data = await post('/order/submitAction', {
         goodsId: goodsId,
         openId: this.openId,
         allPrice: this.allPrice
       })
+      // 跳转订单支付页面
       if (data) {
         wx.navigateTo({
           url: '/pages/order/main'

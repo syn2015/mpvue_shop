@@ -114,6 +114,7 @@ export default {
       }
       // 计算总价
       this.listData.map(item => {
+        // 转换为number类型，避免字符拼接
         this.allprice =
           Number(item.retail_price * item.number) + Number(this.allprice);
       });
