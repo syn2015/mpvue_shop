@@ -3,7 +3,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-
+  // 搜索框
   .search {
     height: 88rpx;
     // width: 100%;
@@ -21,11 +21,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-
+      // 文字
       span {
         display: inline-block;
       }
-
+      // 图标
       .icon {
         background: url('http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/search2-2fb94833aa.png') center no-repeat;
         background-size: 100%;
@@ -35,12 +35,12 @@
       }
     }
   }
-
+  // 主体内容
   .content {
     flex: 1;
     background: #fff;
     display: flex;
-
+    // 左侧菜单
     .left {
       width: 162rpx;
       height: 100%;
@@ -55,21 +55,21 @@
         font-size: 28rpx;
         border-left: 6rpx solid #fff;
       }
-
+      // 选中状态
       .active {
         color: #ab2b2b;
         font-size: 36rpx;
         border-left: 6rpx solid #ab2b2b;
       }
     }
-
+    // 右侧列表
     .right {
       flex: 1;
       border-left: 1rpx solid #fafafa;
       flex: 1;
       height: 100%;
       padding: 0 30rpx 0 30rpx;
-
+      // 展示图
       .banner {
         width: 100%;
         height: 222rpx;
@@ -80,17 +80,17 @@
           height: 100%;
         }
       }
-
+      // 分类
       .title {
         text-align: center;
         padding: 50rpx 0;
-
+        // 文字
         span:nth-child(2) {
           font-size: 24rpx;
           color: #333;
           padding: 0 10rpx;
         }
-
+        // 文字两边的短杠
         span:nth-child(2n + 1) {
           color: #999;
         }

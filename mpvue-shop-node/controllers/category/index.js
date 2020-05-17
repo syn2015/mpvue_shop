@@ -21,6 +21,7 @@ async function categoryNav(ctx) {
 // 分类页面
 async function indexAction(ctx) {
   const { id: categoryId } = ctx.query
+    // 取parent_id为0的数据
   const data = await mysql('nideshop_category').where({
     'parent_id': 0
   }).select()
@@ -42,11 +43,13 @@ async function currentAction(ctx) {
 
   const data =  {}
   const currentOne = await mysql('nideshop_category').where({
-    'id': categoryId
+    'id': categoryId 
   }).select()
+  // 取parent_id相同的所有的数据
   const subList = await mysql('nideshop_category').where({
     'parent_id': currentOne[0].id
   }).select()
+  // 
   data.currentOne = currentOne[0]
   data.currentOne.subList = subList
 
