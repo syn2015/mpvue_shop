@@ -70,12 +70,14 @@ export function getStorageOpenid() {
   }
 }
 
+// 登陆判断
 export function login() {
   const userInfo = wx.getStorageSync('userInfo')
   if (userInfo) {
     return userInfo
   }
 }
+// 跳转登陆
 export function toLogin() {
   const userInfo = wx.getStorageSync('userInfo')
   if (!userInfo) {

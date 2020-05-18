@@ -1,5 +1,6 @@
 <template>
   <div class="my">
+    <!-- 用户信息 -->
     <div class="myinfo">
       <img :src="avator" alt />
       <div>
@@ -8,6 +9,7 @@
         <p v-else>点击登录</p>
       </div>
     </div>
+    <!-- 图标功能 -->
     <div class="iconlist">
       <div @click="goTo(item.url)" v-for="(item, index) in listData" :key="index">
         <span class="iconfont" :class="item.icon"></span>
@@ -18,6 +20,7 @@
 </template>
 
 <script>
+// 引入get请求，login判断，跳转toLogin
 import { get, login, toLogin } from '../../utils'
 export default {
   data() {
@@ -70,16 +73,18 @@ export default {
       Listids: []
     };
   },
+  // onShow()判断登陆
   onShow () {
     if (login()) {
       this.userInfo = login()
-      console.log(this.userInfo)
+      console.log('登陆信息',this.userInfo)
       this.avator = this.userInfo.avatarUrl
     }
   },
   methods: {
+    // 跳转功能页面
     goTo (url) {
-      console.log(123)
+      console.log('goTo传入的参数',url)
       wx.navigateTo({
         url: url
       });
